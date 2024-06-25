@@ -3,26 +3,27 @@
     <h2>How to play</h2>
     <ol>
       <li>
-        Your goal is to have exactly one <span class="queen">♕</span> in each row, column,
-        and color region.
+        Your goal is to have exactly one
+        <img src="@/assets/crown.png" class="queen" /> in each row, column, and color
+        region.
       </li>
       <li>
-        Tap once to place <span class="x">X</span> and tap twice for
-        <span class="queen">♕</span>. Use <span class="x">X</span> to mark where
-        <span class="queen">♕</span> cannot be placed.
+        Tap once to place <span class="x-mark">×</span> and tap twice for
+        <img src="@/assets/crown.png" class="queen" />. Use
+        <span class="x-mark">×</span> to mark where
+        <img src="@/assets/crown.png" class="queen" /> cannot be placed.
       </li>
       <li>
-        Two <span class="queen">♕</span> cannot touch each other, not even diagonally.
+        Two <img src="@/assets/crown.png" class="queen" /> cannot touch each other, not
+        even diagonally.
       </li>
     </ol>
   </div>
 </template>
 
-<style>
+<style scoped>
 .instructions {
-  display: none;
-  text-align: left;
-  margin-bottom: 20px;
+  width: 320px;
 }
 
 .instructions h2 {
@@ -37,5 +38,13 @@
 .instructions li {
   font-size: 14px;
   margin-bottom: 10px;
+}
+
+.queen,
+.x-mark {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  top: 1px;
 }
 </style>

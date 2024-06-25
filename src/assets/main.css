@@ -7,15 +7,12 @@
 
 body {
   margin: 0;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  font-family: 'Poppins', Arial, sans-serif;
   background: linear-gradient(to right, #2e3a59, #3a2e59);
-  color: #fff;
+  color: #ffffff;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  min-height: 100vh;
   line-height: 1.6;
   font-size: 15px;
   text-rendering: optimizeLegibility;

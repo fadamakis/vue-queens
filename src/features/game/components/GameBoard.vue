@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import GridCell from "@/features/game/components/GridCell.vue";
 import { useBoard } from "@/features/game/composables/useBoard";
 import WinMessage from "@/features/game/components/WinMessage.vue";
@@ -18,14 +18,11 @@ const sectionColors = {
   8: "#8B008B",
 };
 
-const { boardState, toggleCell, queens, hasPlayerWon } = useBoard();
+const { boardState, toggleCell, queens, gameWon } = useBoard();
 const { startTimer, stopTimer, resetTimer } = useTimer();
-
-const gameWon = ref(false);
 
 function handleToggleCell(rowIndex, cellIndex) {
   toggleCell(rowIndex, cellIndex);
-  gameWon.value = hasPlayerWon.value;
 
   if (gameWon.value) {
     stopTimer();
@@ -35,12 +32,15 @@ function handleToggleCell(rowIndex, cellIndex) {
 function resetGame() {
   resetTimer();
   stopTimer();
+  clearBoard();
+  startTimer();
+}
+
+function clearBoard() {
   boardState.value = boardState.value.map((row) =>
     row.map((cell) => ({ ...cell, content: null }))
   );
   queens.value = [];
-  gameWon.value = false;
-  startTimer();
 }
 
 onMounted(() => {
@@ -66,8 +66,9 @@ onMounted(() => {
     </template>
   </div>
   <WinMessage v-if="gameWon" />
-  <AppTimer v-else />
+  <AppTimer />
   <AppButton @click="resetGame">Reset Game</AppButton>
+  <AppButton @click="clearBoard">Clear Board</AppButton>
 </template>
 
 <style scoped>

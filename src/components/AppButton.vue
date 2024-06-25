@@ -12,5 +12,6 @@ button {
   font-weight: bold;
   cursor: pointer;
   font-size: 12px;
+  margin-right: 10px;
 }
 </style>

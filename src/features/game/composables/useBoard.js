@@ -113,7 +113,7 @@ export function useBoard() {
     validateBoard();
   }
 
-  const hasPlayerWon = computed(() => {
+  const gameWon = computed(() => {
     if (queens.value.length !== sectionGrid.length) {
       return false;
     }
@@ -125,6 +125,6 @@ export function useBoard() {
     boardState,
     toggleCell,
     queens,
-    hasPlayerWon
+    gameWon
   };
 }

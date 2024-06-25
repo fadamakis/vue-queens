@@ -1,21 +1,11 @@
 <script setup>
-defineProps(["cell", "color", "invalid"]);
-const emit = defineEmits(["toggle"]);
-
-const toggle = () => {
-  emit("toggle");
-};
+defineProps(["content", "color", "invalid"]);
 </script>
 
 <template>
-  <div
-    class="cell"
-    :class="{ invalid }"
-    :style="{ backgroundColor: color }"
-    @click="toggle"
-  >
-    <img v-if="cell.content === 'queen'" src="@/assets/crown.png" class="queen" />
-    <span v-if="cell.content === 'marked'">×</span>
+  <div class="cell" :class="{ invalid }" :style="{ backgroundColor: color }">
+    <img v-if="content === 'queen'" src="@/assets/crown.png" class="queen" />
+    <span v-if="content === 'marked'">×</span>
   </div>
 </template>
 

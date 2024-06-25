@@ -1,24 +1,20 @@
 <script setup>
 import { onMounted } from "vue";
 import GridCell from "@/features/game/components/GridCell.vue";
-import { useBoard } from "@/features/game/composables/useBoard";
+import { createGame } from "@/features/game/composables/createGame";
 import WinMessage from "@/features/game/components/WinMessage.vue";
 import AppTimer from "@/features/timer/components/AppTimer.vue";
 import { useTimer } from "@/features/timer/composables/useTimer";
 import AppButton from "@/components/AppButton.vue";
+import { cellColors } from "@/features/game/data/cellColors.js";
 
-const sectionColors = {
-  1: "#007B6C",
-  2: "#D18B00",
-  3: "#C75D00",
-  4: "#0044CC",
-  5: "#CC0000",
-  6: "#CCCC00",
-  7: "#008B8B",
-  8: "#8B008B",
-};
-
-const { boardState, toggleCell, queens, gameWon } = useBoard();
+const {
+  boardState,
+  gameWon,
+  isValidQueen,
+  toggleCell,
+  clearBoard,
+} = createGame();
 const { startTimer, stopTimer, resetTimer } = useTimer();
 
 function handleToggleCell(rowIndex, cellIndex) {
@@ -36,13 +32,6 @@ function resetGame() {
   startTimer();
 }
 
-function clearBoard() {
-  boardState.value = boardState.value.map((row) =>
-    row.map((cell) => ({ ...cell, content: null }))
-  );
-  queens.value = [];
-}
-
 onMounted(() => {
   startTimer();
 });
@@ -54,14 +43,10 @@ onMounted(() => {
       <GridCell
         v-for="(cell, cellIndex) in row"
         :key="`${rowIndex}-${cellIndex}`"
-        :cell="cell"
-        :style="{ background: sectionColors[cell.section] }"
-        :invalid="
-          queens.some(
-            (queen) => queen.row === rowIndex && queen.col === cellIndex && !queen.valid
-          )
-        "
-        @toggle="handleToggleCell(rowIndex, cellIndex)"
+        :content="cell.content"
+        :color="cellColors[cell.section]"
+        :invalid="isValidQueen(rowIndex, cellIndex)"
+        @click="handleToggleCell(rowIndex, cellIndex)"
       />
     </template>
   </div>

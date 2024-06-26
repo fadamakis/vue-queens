@@ -8,13 +8,7 @@ import { useTimer } from "@/features/timer/composables/useTimer";
 import AppButton from "@/components/AppButton.vue";
 import { cellColors } from "@/features/game/data/cellColors.js";
 
-const {
-  boardState,
-  gameWon,
-  isValidQueen,
-  toggleCell,
-  clearBoard,
-} = createGame();
+const { boardState, gameWon, isValidQueen, toggleCell, clearBoard } = createGame();
 const { startTimer, stopTimer, resetTimer } = useTimer();
 
 function handleToggleCell(rowIndex, cellIndex) {
@@ -26,10 +20,8 @@ function handleToggleCell(rowIndex, cellIndex) {
 }
 
 function resetGame() {
-  resetTimer();
-  stopTimer();
   clearBoard();
-  startTimer();
+  resetTimer();
 }
 
 onMounted(() => {

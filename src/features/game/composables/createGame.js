@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import { sectionGrid } from '@/features/game/data/sectionGrid'
+import { easy as sectionGrid } from '@/features/game/data/sectionGrid'
 
 function createBoard() {
   return sectionGrid.map((row) =>
@@ -89,13 +89,11 @@ export function createGame() {
       const { row, col } = queen
       const cell = boardState.value[row][col]
       const rowValid = validateRow(row)
-      const colValid = validateColumn(col)
+      const columnValid = validateColumn(col)
       const sectionValid = validateSection(cell.section)
       const diagonalValid = checkDiagonalConflicts(queen)
 
-      if (!rowValid || !colValid || !sectionValid || !diagonalValid) {
-        queen.valid = false
-      }
+      queen.valid = rowValid && columnValid && sectionValid && diagonalValid
     }
   }
 
